@@ -6,158 +6,120 @@
   <meta name="description" content="Truyện Tự Dịch Tự Nghe - ứng dụng Android hỗ trợ dịch, lưu, đọc và nghe truyện bằng giọng Việt.">
   <title>Truyện Tự Dịch Tự Nghe</title>
   <style>
-    :root {
-      color-scheme: light;
-      --ink: #102f32;
-      --ink-soft: #395453;
-      --muted: #6a7c79;
-      --deep: #082d30;
-      --teal: #176f68;
-      --teal-dark: #0d514d;
-      --mint: #dff2ea;
-      --sand: #f5f1e8;
-      --paper: #fffdf8;
-      --line: #d9e7e1;
-      --gold: #c9924c;
-      --gold-soft: #f8e9d0;
-      --shadow: 0 24px 70px rgba(9, 50, 49, .12);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--sand);
-      font-family: "Roboto", "Segoe UI", Arial, sans-serif;
-      font-feature-settings: "kern" 1;
-      font-kerning: normal;
-      text-rendering: optimizeLegibility;
-      line-height: 1.6;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 8% 8%, rgba(205, 240, 228, .72), transparent 27rem),
-        radial-gradient(circle at 94% 38%, rgba(247, 225, 187, .36), transparent 24rem);
-    }
-    a { color: var(--teal-dark); }
-    .wrap { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
-    .site-header {
-      position: sticky;
-      z-index: 10;
-      top: 0;
-      border-bottom: 1px solid rgba(217, 231, 225, .86);
-      background: rgba(245, 241, 232, .82);
-      backdrop-filter: blur(18px);
-    }
-    .nav-wrap { display: flex; align-items: center; justify-content: space-between; gap: 26px; min-height: 76px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; font-size: .98rem; font-weight: 850; letter-spacing: .01em; }
-    .brand-mark { position: relative; display: inline-grid; place-items: center; width: 34px; height: 34px; overflow: hidden; border-radius: 12px; background: var(--deep); box-shadow: 0 8px 18px rgba(8, 45, 48, .2); }
-    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; display: block; border-radius: 99px; background: #d7b16f; }
-    .brand-mark::before { width: 19px; height: 3px; transform: rotate(-34deg) translateY(-5px); }
-    .brand-mark::after { width: 14px; height: 3px; transform: rotate(-34deg) translateY(4px); }
-    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 22px; font-size: .9rem; }
-    nav a { color: var(--ink-soft); text-decoration: none; font-weight: 700; }
-    nav a:hover { color: var(--teal-dark); }
-
-    .hero { position: relative; overflow: hidden; padding: 88px 0 76px; }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(390px, .98fr); align-items: center; gap: 72px; }
-    .kicker, .section-kicker { margin: 0 0 16px; color: var(--teal); font-size: .76rem; font-weight: 900; letter-spacing: .17em; text-transform: uppercase; }
-    h1, h2, h3, p { overflow-wrap: anywhere; }
-    h1, h2 { font-family: "Roboto", "Segoe UI", Arial, sans-serif; font-weight: 850; letter-spacing: -.028em; }
-    h1 { max-width: 720px; margin: 0; font-size: clamp(2.9rem, 6vw, 5.4rem); line-height: 1.04; }
-    .hero-copy { max-width: 700px; margin: 24px 0 30px; color: var(--ink-soft); font-size: clamp(1.08rem, 1.8vw, 1.3rem); line-height: 1.7; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 19px; border: 1px solid var(--teal); border-radius: 999px; background: var(--teal); color: #fff; text-decoration: none; font-weight: 800; box-shadow: 0 12px 24px rgba(23, 111, 104, .16); }
-    .button:hover { border-color: var(--teal-dark); background: var(--teal-dark); }
-    .button.secondary { border-color: rgba(23, 111, 104, .48); background: rgba(255, 253, 248, .5); color: var(--teal-dark); box-shadow: none; }
-    .button.secondary:hover { background: var(--mint); }
-    .hero-note { display: flex; align-items: center; gap: 9px; margin: 22px 0 0; color: var(--muted); font-size: .86rem; }
-    .check { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--gold-soft); color: #8a5b23; font-size: .72rem; font-weight: 900; }
-
-    .hero-art { position: relative; min-height: 520px; }
-    .hero-art::before { content: ""; position: absolute; inset: 8% 2% 4% 9%; border-radius: 42px; background: linear-gradient(145deg, rgba(208, 239, 228, .9), rgba(247, 226, 190, .58)); transform: rotate(5deg); }
-    .product-card { position: absolute; inset: 7% 9% 7% 2%; padding: 22px; border: 1px solid rgba(255, 255, 255, .82); border-radius: 30px; background: rgba(255, 253, 248, .84); box-shadow: var(--shadow); backdrop-filter: blur(18px); transform: rotate(-2deg); }
-    .product-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; color: var(--muted); font-size: .78rem; font-weight: 800; }
-    .mini-brand { display: inline-flex; align-items: center; gap: 8px; }
-    .mini-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 5px var(--mint); }
-    .live-chip { padding: 6px 9px; border-radius: 999px; background: var(--gold-soft); color: #80541f; font-size: .64rem; letter-spacing: .08em; }
-    .book-card { display: grid; grid-template-columns: 88px 1fr; align-items: center; gap: 16px; padding: 16px; border-radius: 20px; background: linear-gradient(135deg, var(--deep), #145b56); color: #f5fffa; }
-    .book-cover { display: grid; place-items: center; min-height: 108px; border-radius: 13px; background: linear-gradient(150deg, #d2a45c, #875c32); color: #fff7e7; font-size: .67rem; font-weight: 900; letter-spacing: .12em; text-align: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
-    .book-card h3 { margin: 5px 0 4px; font-size: 1.16rem; line-height: 1.2; }
-    .book-label { margin: 0; color: #9ed8c9; font-size: .64rem; font-weight: 900; letter-spacing: .13em; }
-    .book-meta { margin: 0; color: #c8e5dc; font-size: .78rem; }
-    .reading-sample { margin: 18px 4px; padding: 18px 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.7); }
-    .chapter-tag { color: var(--gold); font-size: .67rem; font-weight: 900; letter-spacing: .14em; }
-    .reading-sample p:last-child { margin: 9px 0 0; color: #4d6561; font-family:"Roboto","Segoe UI",Arial,sans-serif; font-size: 1.03rem; line-height: 1.7; }
-    .audio-row { display: grid; grid-template-columns: 45px 1fr auto; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 17px; background: #edf6f1; }
-    .play { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .75rem; box-shadow: 0 8px 14px rgba(23,111,104,.22); }
-    .audio-info strong { display: block; color: var(--ink); font-size: .85rem; }
-    .audio-info span { display: block; margin-top: 2px; color: var(--muted); font-size: .72rem; }
-    .progress { width: 72px; height: 5px; overflow: hidden; border-radius: 99px; background: #cbded6; }
-    .progress::before { content: ""; display: block; width: 58%; height: 100%; border-radius: inherit; background: var(--gold); }
-    .floating-note { position: absolute; z-index: 2; display: flex; align-items: center; gap: 9px; padding: 11px 13px; border: 1px solid rgba(255,255,255,.9); border-radius: 15px; background: rgba(255,253,248,.9); box-shadow: 0 14px 30px rgba(9,50,49,.14); color: var(--ink); font-size: .76rem; font-weight: 800; }
-    .floating-note::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); }
-    .note-one { top: 1%; right: -2%; }
-    .note-two { right: -5%; bottom: 10%; }
-    .note-two::before { background: var(--gold); }
-
-    .stats { padding: 0 0 86px; }
-    .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--line); box-shadow: 0 12px 34px rgba(25,59,58,.05); }
-    .stat { padding: 23px 26px; background: rgba(255,253,248,.76); }
-    .stat strong { display: block; color: var(--teal-dark); font-size: 1.04rem; }
-    .stat span { display: block; margin-top: 3px; color: var(--muted); font-size: .86rem; }
-
-    section { padding: 92px 0; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
-    h2 { max-width: 650px; margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; }
-    .section-intro { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.02rem; }
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .feature-card { position: relative; min-height: 205px; padding: 25px; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: rgba(255,253,248,.78); box-shadow: 0 10px 28px rgba(25,59,58,.045); }
-    .feature-card::after { content: ""; position: absolute; right: -36px; bottom: -44px; width: 118px; height: 118px; border-radius: 50%; background: var(--mint); opacity: .6; }
-    .feature-card:nth-child(2)::after, .feature-card:nth-child(5)::after { background: var(--gold-soft); }
-    .feature-index { position: relative; z-index: 1; display: inline-grid; place-items: center; width: 38px; height: 38px; margin-bottom: 23px; border-radius: 13px; background: var(--deep); color: #d9f2e9; font-size: .72rem; font-weight: 900; letter-spacing: .06em; }
-    .feature-card h3 { position: relative; z-index: 1; margin: 0 0 8px; font-size: 1.1rem; }
-    .feature-card p { position: relative; z-index: 1; max-width: 280px; margin: 0; color: var(--muted); font-size: .9rem; }
-
-    .dark-section { position: relative; overflow: hidden; background: var(--deep); color: #f1fbf6; }
-    .dark-section::before { content: ""; position: absolute; width: 560px; height: 560px; right: -180px; top: -220px; border: 1px solid rgba(172, 222, 205, .16); border-radius: 50%; box-shadow: 0 0 0 48px rgba(172,222,205,.035), 0 0 0 96px rgba(172,222,205,.025); }
-    .dark-section .section-kicker { color: #9fdbc9; }
-    .dark-section h2 { color: #f1fbf6; }
-    .dark-section .section-intro { color: #b8d5cc; }
-    .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 46px; }
-    .workflow-step { position: relative; padding: 0 24px 0 0; }
-    .workflow-step:not(:last-child)::after { content: ""; position: absolute; top: 18px; right: 24px; left: 57px; height: 1px; background: rgba(164, 215, 199, .26); }
-    .workflow-number { position: relative; z-index: 1; display: grid; place-items: center; width: 37px; height: 37px; margin-bottom: 22px; border: 1px solid #6ab9a5; border-radius: 50%; background: var(--deep); color: #b5e5d5; font-size: .74rem; font-weight: 900; }
-    .workflow-step h3 { margin: 0 0 8px; color: #f4fffa; font-size: 1.08rem; }
-    .workflow-step p { max-width: 220px; margin: 0; color: #b8d5cc; font-size: .88rem; }
-
-    .trust { background: linear-gradient(180deg, rgba(255,253,248,.34), rgba(223,242,234,.64)); }
-    .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .trust-card { padding: 31px; border: 1px solid var(--line); border-radius: 26px; background: rgba(255,253,248,.86); }
-    .trust-card.accent { border-color: transparent; background: linear-gradient(145deg, #e4f4ec, #f7e8cd); }
-    .trust-card h3 { margin: 0 0 12px; font-size: 1.35rem; }
-    .trust-card p { margin: 0; color: var(--ink-soft); }
-    .trust-card ul { margin: 18px 0 0; padding-left: 1.1rem; color: var(--muted); }
-    .trust-card li + li { margin-top: 7px; }
-
-    .contact { padding-top: 75px; }
-    .contact-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 30px; padding: 35px; border-radius: 28px; background: var(--gold-soft); }
-    .contact-card h2 { max-width: 660px; color: var(--deep); font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
-    .contact-card p { max-width: 670px; margin: 13px 0 0; color: #685337; }
-    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 19px; }
-    .contact-links a { font-size: .9rem; font-weight: 800; }
-    footer { padding: 34px 0 55px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
-    footer .footer-row { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
-    footer p { margin: 5px 0; }
-    footer a { text-decoration: none; font-weight: 750; }
-    footer a:hover { text-decoration: underline; }
-    @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } .hero-art { min-height: 480px; max-width: 620px; width: 100%; margin: 0 auto; } .feature-grid { grid-template-columns: repeat(2, 1fr); } .workflow { grid-template-columns: repeat(2, 1fr); gap: 34px 0; } .workflow-step:nth-child(2)::after { display: none; } }
-    @media (max-width: 680px) { .wrap { width: min(100% - 30px, 560px); } .nav-wrap { align-items: flex-start; flex-direction: column; padding: 15px 0; } nav { justify-content: flex-start; gap: 12px 18px; } .hero { padding: 56px 0 54px; } h1 { font-size: clamp(2.55rem, 13vw, 4.1rem); } .hero-art { min-height: 400px; } .product-card { inset: 7% 0 7% 0; padding: 15px; border-radius: 23px; } .note-one { top: -1%; right: 0; } .note-two { right: -2%; bottom: 2%; } .stat-strip, .feature-grid, .trust-grid { grid-template-columns: 1fr; } section { padding: 63px 0; } .section-head { align-items: flex-start; flex-direction: column; gap: 14px; } .workflow { grid-template-columns: 1fr; gap: 28px; } .workflow-step:not(:last-child)::after { display: none; } .contact-card { grid-template-columns: 1fr; padding: 27px; } footer .footer-row { flex-direction: column; } }
+    :root { color-scheme: light; --ink:#102f32; --ink-soft:#395453; --muted:#6a7c79; --deep:#082d30; --teal:#176f68; --teal-dark:#0d514d; --mint:#dff2ea; --sand:#f5f1e8; --paper:#fffdf8; --line:#d9e7e1; --gold:#c9924c; --gold-soft:#f8e9d0; --shadow:0 24px 70px rgba(9,50,49,.12); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--sand); font-family:"Roboto","Segoe UI",Arial,sans-serif; font-feature-settings:"kern" 1; font-kerning:normal; text-rendering:optimizeLegibility; line-height:1.6; }
+    body::before { content:""; position:fixed; z-index:-1; inset:0; pointer-events:none; background:radial-gradient(circle at 8% 8%,rgba(205,240,228,.72),transparent 27rem),radial-gradient(circle at 94% 38%,rgba(247,225,187,.36),transparent 24rem); }
+    a { color:var(--teal-dark); }
+    .wrap { width:min(1160px,calc(100% - 44px)); margin:0 auto; }
+    .site-header { position:sticky; z-index:10; top:0; border-bottom:1px solid rgba(217,231,225,.86); background:rgba(245,241,232,.82); backdrop-filter:blur(18px); }
+    .nav-wrap { display:flex; align-items:center; justify-content:space-between; gap:26px; min-height:76px; }
+    .brand { display:inline-flex; align-items:center; gap:11px; color:var(--ink); text-decoration:none; font-size:.98rem; font-weight:850; letter-spacing:.01em; }
+    .brand-mark { position:relative; display:inline-grid; place-items:center; width:34px; height:34px; overflow:hidden; border-radius:12px; background:var(--deep); box-shadow:0 8px 18px rgba(8,45,48,.2); }
+    .brand-mark::before,.brand-mark::after { content:""; position:absolute; display:block; border-radius:99px; background:#d7b16f; }
+    .brand-mark::before { width:19px; height:3px; transform:rotate(-34deg) translateY(-5px); }
+    .brand-mark::after { width:14px; height:3px; transform:rotate(-34deg) translateY(4px); }
+    nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:20px; font-size:.9rem; }
+    nav a { color:var(--ink-soft); text-decoration:none; font-weight:700; }
+    nav a:hover { color:var(--teal-dark); }
+    h1,h2,h3,p { overflow-wrap:anywhere; }
+    h1,h2 { font-family:"Roboto","Segoe UI",Arial,sans-serif; font-weight:850; letter-spacing:-.028em; }
+    .hero { position:relative; overflow:hidden; padding:88px 0 76px; }
+    .hero-grid { display:grid; grid-template-columns:minmax(0,1.02fr) minmax(390px,.98fr); align-items:center; gap:72px; }
+    .kicker,.section-kicker { margin:0 0 16px; color:var(--teal); font-size:.76rem; font-weight:900; letter-spacing:.17em; text-transform:uppercase; }
+    h1 { max-width:720px; margin:0; font-size:clamp(2.9rem,6vw,5.4rem); line-height:1.04; }
+    .hero-copy { max-width:700px; margin:24px 0 30px; color:var(--ink-soft); font-size:clamp(1.08rem,1.8vw,1.3rem); line-height:1.7; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 19px; border:1px solid var(--teal); border-radius:999px; background:var(--teal); color:#fff; text-decoration:none; font-weight:800; box-shadow:0 12px 24px rgba(23,111,104,.16); }
+    .button:hover { border-color:var(--teal-dark); background:var(--teal-dark); }
+    .button.secondary { border-color:rgba(23,111,104,.48); background:rgba(255,253,248,.5); color:var(--teal-dark); box-shadow:none; }
+    .button.secondary:hover { background:var(--mint); }
+    .hero-note { display:flex; align-items:center; gap:9px; margin:22px 0 0; color:var(--muted); font-size:.86rem; }
+    .check { display:inline-grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--gold-soft); color:#8a5b23; font-size:.72rem; font-weight:900; }
+    .hero-art { position:relative; min-height:520px; }
+    .hero-art::before { content:""; position:absolute; inset:8% 2% 4% 9%; border-radius:42px; background:linear-gradient(145deg,rgba(208,239,228,.9),rgba(247,226,190,.58)); transform:rotate(5deg); }
+    .product-card { position:absolute; inset:7% 9% 7% 2%; padding:22px; border:1px solid rgba(255,255,255,.82); border-radius:30px; background:rgba(255,253,248,.84); box-shadow:var(--shadow); backdrop-filter:blur(18px); transform:rotate(-2deg); }
+    .product-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; color:var(--muted); font-size:.78rem; font-weight:800; }
+    .mini-brand { display:inline-flex; align-items:center; gap:8px; }
+    .mini-dot { width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 5px var(--mint); }
+    .live-chip { padding:6px 9px; border-radius:999px; background:var(--gold-soft); color:#80541f; font-size:.64rem; letter-spacing:.08em; }
+    .book-card { display:grid; grid-template-columns:88px 1fr; align-items:center; gap:16px; padding:16px; border-radius:20px; background:linear-gradient(135deg,var(--deep),#145b56); color:#f5fffa; }
+    .book-cover { display:grid; place-items:center; min-height:108px; border-radius:13px; background:linear-gradient(150deg,#d2a45c,#875c32); color:#fff7e7; font-size:.67rem; font-weight:900; letter-spacing:.12em; text-align:center; box-shadow:inset 0 0 0 1px rgba(255,255,255,.2); }
+    .book-card h3 { margin:5px 0 4px; font-size:1.16rem; line-height:1.2; }
+    .book-label { margin:0; color:#9ed8c9; font-size:.64rem; font-weight:900; letter-spacing:.13em; }
+    .book-meta { margin:0; color:#c8e5dc; font-size:.78rem; }
+    .reading-sample { margin:18px 4px; padding:18px 16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.7); }
+    .chapter-tag { color:var(--gold); font-size:.67rem; font-weight:900; letter-spacing:.14em; }
+    .reading-sample p:last-child { margin:9px 0 0; color:#4d6561; font-size:1.03rem; line-height:1.7; }
+    .audio-row { display:grid; grid-template-columns:45px 1fr auto; align-items:center; gap:12px; padding:13px 14px; border-radius:17px; background:#edf6f1; }
+    .play { display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:var(--teal); color:#fff; font-size:.75rem; box-shadow:0 8px 14px rgba(23,111,104,.22); }
+    .audio-info strong { display:block; color:var(--ink); font-size:.85rem; }
+    .audio-info span { display:block; margin-top:2px; color:var(--muted); font-size:.72rem; }
+    .progress { width:72px; height:5px; overflow:hidden; border-radius:99px; background:#cbded6; }
+    .progress::before { content:""; display:block; width:58%; height:100%; border-radius:inherit; background:var(--gold); }
+    .floating-note { position:absolute; z-index:2; display:flex; align-items:center; gap:9px; padding:11px 13px; border:1px solid rgba(255,255,255,.9); border-radius:15px; background:rgba(255,253,248,.9); box-shadow:0 14px 30px rgba(9,50,49,.14); color:var(--ink); font-size:.76rem; font-weight:800; }
+    .floating-note::before { content:""; width:9px; height:9px; border-radius:50%; background:var(--teal); }
+    .note-one { top:1%; right:-2%; }
+    .note-two { right:-5%; bottom:10%; }
+    .note-two::before { background:var(--gold); }
+    .stats { padding:0 0 86px; }
+    .stat-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; overflow:hidden; border:1px solid var(--line); border-radius:24px; background:var(--line); box-shadow:0 12px 34px rgba(25,59,58,.05); }
+    .stat { padding:23px 26px; background:rgba(255,253,248,.76); }
+    .stat strong { display:block; color:var(--teal-dark); font-size:1.04rem; }
+    .stat span { display:block; margin-top:3px; color:var(--muted); font-size:.86rem; }
+    section { padding:92px 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:34px; }
+    h2 { max-width:650px; margin:0; font-size:clamp(2rem,4vw,3.5rem); line-height:1.1; }
+    .section-intro { max-width:430px; margin:0; color:var(--muted); font-size:1.02rem; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature-card { position:relative; min-height:205px; padding:25px; overflow:hidden; border:1px solid var(--line); border-radius:24px; background:rgba(255,253,248,.78); box-shadow:0 10px 28px rgba(25,59,58,.045); }
+    .feature-card::after { content:""; position:absolute; right:-36px; bottom:-44px; width:118px; height:118px; border-radius:50%; background:var(--mint); opacity:.6; }
+    .feature-card:nth-child(2)::after,.feature-card:nth-child(5)::after { background:var(--gold-soft); }
+    .feature-index { position:relative; z-index:1; display:inline-grid; place-items:center; width:38px; height:38px; margin-bottom:23px; border-radius:13px; background:var(--deep); color:#d9f2e9; font-size:.72rem; font-weight:900; letter-spacing:.06em; }
+    .feature-card h3 { position:relative; z-index:1; margin:0 0 8px; font-size:1.1rem; }
+    .feature-card p { position:relative; z-index:1; max-width:280px; margin:0; color:var(--muted); font-size:.9rem; }
+    .gallery-section { padding-top:68px; background:linear-gradient(180deg,rgba(255,253,248,.18),rgba(223,242,234,.48)); }
+    .gallery-note { display:flex; align-items:center; gap:10px; max-width:620px; margin:0 0 26px; color:var(--muted); font-size:.9rem; }
+    .note-badge { display:inline-grid; place-items:center; flex:0 0 auto; width:24px; height:24px; border-radius:50%; background:var(--mint); color:var(--teal-dark); font-weight:900; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .ui-reference { margin:0; }
+    .ui-frame { overflow:hidden; border:1px solid rgba(255,255,255,.9); border-radius:30px; background:var(--deep); box-shadow:0 22px 55px rgba(9,50,49,.16); }
+    .ui-frame svg { display:block; width:100%; height:auto; }
+    .ui-reference figcaption { padding:15px 4px 0; color:var(--ink-soft); font-size:.9rem; font-weight:800; }
+    .ui-reference figcaption span { display:block; margin-top:3px; color:var(--muted); font-size:.8rem; font-weight:500; }
+    .dark-section { position:relative; overflow:hidden; background:var(--deep); color:#f1fbf6; }
+    .dark-section::before { content:""; position:absolute; width:560px; height:560px; right:-180px; top:-220px; border:1px solid rgba(172,222,205,.16); border-radius:50%; box-shadow:0 0 0 48px rgba(172,222,205,.035),0 0 0 96px rgba(172,222,205,.025); }
+    .dark-section .section-kicker { color:#9fdbc9; }
+    .dark-section h2 { color:#f1fbf6; }
+    .dark-section .section-intro { color:#b8d5cc; }
+    .workflow { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:46px; }
+    .workflow-step { position:relative; padding:0 24px 0 0; }
+    .workflow-step:not(:last-child)::after { content:""; position:absolute; top:18px; right:24px; left:57px; height:1px; background:rgba(164,215,199,.26); }
+    .workflow-number { position:relative; z-index:1; display:grid; place-items:center; width:37px; height:37px; margin-bottom:22px; border:1px solid #6ab9a5; border-radius:50%; background:var(--deep); color:#b5e5d5; font-size:.74rem; font-weight:900; }
+    .workflow-step h3 { margin:0 0 8px; color:#f4fffa; font-size:1.08rem; }
+    .workflow-step p { max-width:220px; margin:0; color:#b8d5cc; font-size:.88rem; }
+    .trust { background:linear-gradient(180deg,rgba(255,253,248,.34),rgba(223,242,234,.64)); }
+    .trust-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .trust-card { padding:31px; border:1px solid var(--line); border-radius:26px; background:rgba(255,253,248,.86); }
+    .trust-card.accent { border-color:transparent; background:linear-gradient(145deg,#e4f4ec,#f7e8cd); }
+    .trust-card h3 { margin:0 0 12px; font-size:1.35rem; }
+    .trust-card p { margin:0; color:var(--ink-soft); }
+    .trust-card ul { margin:18px 0 0; padding-left:1.1rem; color:var(--muted); }
+    .trust-card li+li { margin-top:7px; }
+    .contact { padding-top:75px; }
+    .contact-card { display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px; padding:35px; border-radius:28px; background:var(--gold-soft); }
+    .contact-card h2 { max-width:660px; color:var(--deep); font-size:clamp(1.8rem,3.5vw,2.8rem); }
+    .contact-card p { max-width:670px; margin:13px 0 0; color:#685337; }
+    .contact-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:19px; }
+    .contact-links a { font-size:.9rem; font-weight:800; }
+    footer { padding:34px 0 55px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
+    footer .footer-row { display:flex; align-items:start; justify-content:space-between; gap:20px; }
+    footer p { margin:5px 0; }
+    footer a { text-decoration:none; font-weight:750; }
+    footer a:hover { text-decoration:underline; }
+    @media (max-width:920px) { .hero-grid { grid-template-columns:1fr; gap:40px; } .hero-art { min-height:480px; max-width:620px; width:100%; margin:0 auto; } .feature-grid,.gallery-grid { grid-template-columns:repeat(2,1fr); } .workflow { grid-template-columns:repeat(2,1fr); gap:34px 0; } .workflow-step:nth-child(2)::after { display:none; } }
+    @media (max-width:680px) { .wrap { width:min(100% - 30px,560px); } .nav-wrap { align-items:flex-start; flex-direction:column; padding:15px 0; } nav { justify-content:flex-start; gap:12px 16px; } .hero { padding:56px 0 54px; } h1 { font-size:clamp(2.55rem,13vw,4.1rem); } .hero-art { min-height:400px; } .product-card { inset:7% 0 7% 0; padding:15px; border-radius:23px; } .note-one { top:-1%; right:0; } .note-two { right:-2%; bottom:2%; } .stat-strip,.feature-grid,.gallery-grid,.trust-grid { grid-template-columns:1fr; } section { padding:63px 0; } .section-head { align-items:flex-start; flex-direction:column; gap:14px; } .workflow { grid-template-columns:1fr; gap:28px; } .workflow-step:not(:last-child)::after { display:none; } .contact-card { grid-template-columns:1fr; padding:27px; } footer .footer-row { flex-direction:column; } }
   </style>
 </head>
 <body>
@@ -166,13 +128,13 @@
       <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span>Truyện Tự Dịch Tự Nghe</span></a>
       <nav aria-label="Điều hướng chính">
         <a href="#tinh-nang">Tính năng</a>
+        <a href="#giao-dien">Giao diện</a>
         <a href="#quy-trinh">Quy trình</a>
         <a href="privacy.html">Quyền riêng tư</a>
         <a href="terms.html">Điều khoản</a>
       </nav>
     </div>
   </header>
-
   <main>
     <section class="hero">
       <div class="wrap hero-grid">
@@ -180,83 +142,72 @@
           <p class="kicker">Ứng dụng Android · đọc và nghe</p>
           <h1>Đưa câu chuyện về đúng nhịp của bạn.</h1>
           <p class="hero-copy">Truyện Tự Dịch Tự Nghe giúp bạn mở nguồn truyện, dịch VietPhrase tại thiết bị, lưu chương vào thư viện và nghe bằng giọng Việt — trong một luồng đọc gọn gàng, chủ động và dễ kiểm tra.</p>
-          <div class="actions">
-            <a class="button" href="#tinh-nang">Khám phá tính năng <span aria-hidden="true">↗</span></a>
-            <a class="button secondary" href="privacy.html">Xem quyền riêng tư</a>
-          </div>
+          <div class="actions"><a class="button" href="#tinh-nang">Khám phá tính năng <span aria-hidden="true">↗</span></a><a class="button secondary" href="privacy.html">Xem quyền riêng tư</a></div>
           <p class="hero-note"><span class="check" aria-hidden="true">✓</span> Không phải kho truyện · không cấp quyền cho nội dung bên thứ ba</p>
         </div>
-
         <div class="hero-art" aria-label="Minh họa giao diện đọc và nghe">
-          <div class="floating-note note-one">Dịch tại thiết bị</div>
-          <div class="floating-note note-two">Piper tiếng Việt</div>
+          <div class="floating-note note-one">Dịch tại thiết bị</div><div class="floating-note note-two">Giọng Việt</div>
           <div class="product-card">
             <div class="product-top"><span class="mini-brand"><span class="mini-dot" aria-hidden="true"></span>Thư viện của bạn</span><span class="live-chip">ĐANG NGHE</span></div>
-            <div class="book-card">
-              <div class="book-cover">ĐỌC<br>NGHE</div>
-              <div><p class="book-label">CHƯƠNG ĐÃ LƯU</p><h3>Hành trình qua trang sách</h3><p class="book-meta">VietPhrase · đã kiểm tra</p></div>
-            </div>
-            <div class="reading-sample"><span class="chapter-tag">CHƯƠNG 12 · BẢN XEM TRƯỚC</span><p>Giữ bản gốc để đối chiếu. Chọn bản dịch, chỉnh câu chữ rồi lưu lại theo cách của bạn.</p></div>
-            <div class="audio-row"><span class="play" aria-hidden="true">▶</span><div class="audio-info"><strong>Ngọc Huyền · Piper tiếng Việt</strong><span>Đang phát đoạn tiếp theo</span></div><span class="progress" aria-hidden="true"></span></div>
+            <div class="book-card"><div class="book-cover">ĐỌC<br>NGHE</div><div><p class="book-label">CHƯƠNG ĐÃ LƯU</p><h3>Hành trình qua trang sách</h3><p class="book-meta">VietPhrase · đã kiểm tra</p></div></div>
+            <div class="reading-sample"><span class="chapter-tag">CHƯƠNG MẪU · BẢN XEM TRƯỚC</span><p>Giữ bản gốc để đối chiếu. Chọn bản dịch, chỉnh câu chữ rồi lưu lại theo cách của bạn.</p></div>
+            <div class="audio-row"><span class="play" aria-hidden="true">▶</span><div class="audio-info"><strong>Giọng Việt · đang phát</strong><span>Đoạn tiếp theo trong thư viện</span></div><span class="progress" aria-hidden="true"></span></div>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="stats">
-      <div class="wrap stat-strip">
-        <div class="stat"><strong>Dịch cục bộ</strong><span>VietPhrase được xử lý ngay trên thiết bị.</span></div>
-        <div class="stat"><strong>Thư viện riêng</strong><span>Chương đã lưu và tệp nhập nằm trong app.</span></div>
-        <div class="stat"><strong>Giọng Việt tự nhiên</strong><span>Android TTS hoặc Piper, có thể nghe khi tắt màn hình.</span></div>
-      </div>
-    </section>
-
-    <section id="tinh-nang">
+    <section class="stats"><div class="wrap stat-strip"><div class="stat"><strong>Dịch cục bộ</strong><span>VietPhrase được xử lý ngay trên thiết bị.</span></div><div class="stat"><strong>Thư viện riêng</strong><span>Chương đã lưu và tệp nhập nằm trong app.</span></div><div class="stat"><strong>Giọng Việt tự nhiên</strong><span>Android TTS hoặc giọng tải thêm, có thể nghe khi tắt màn hình.</span></div></div></section>
+    <section id="tinh-nang"><div class="wrap"><div class="section-head"><div><p class="section-kicker">Công cụ vừa đủ</p><h2>Mọi thứ cần cho một buổi đọc liền mạch.</h2></div><p class="section-intro">Từ trình duyệt đến trình phát, mỗi phần đều giữ cho bạn quyền chọn nguồn, kiểm tra bản dịch và quyết định nội dung muốn lưu.</p></div><div class="feature-grid">
+      <article class="feature-card"><span class="feature-index">01</span><h3>Trình duyệt tích hợp</h3><p>Mở website, giữ tab, lịch sử, cookie và cache theo cách quen thuộc.</p></article>
+      <article class="feature-card"><span class="feature-index">02</span><h3>Dịch VietPhrase tại thiết bị</h3><p>Dịch phần chữ đang hiển thị, vẫn giữ nội dung gốc để đối chiếu.</p></article>
+      <article class="feature-card"><span class="feature-index">03</span><h3>Xem trước trước khi lưu</h3><p>Kiểm tra RAW, bản dịch và phần rác đã lọc trước khi đưa vào thư viện.</p></article>
+      <article class="feature-card"><span class="feature-index">04</span><h3>Tải chương theo khoảng</h3><p>Tải hàng loạt theo URL đầu/cuối, có checkpoint để tiếp tục khi gián đoạn.</p></article>
+      <article class="feature-card"><span class="feature-index">05</span><h3>Nhập ebook</h3><p>Đọc TXT, EPUB, MOBI, AZW3 không DRM và PDF có lớp chữ chọn được.</p></article>
+      <article class="feature-card"><span class="feature-index">06</span><h3>Nghe theo cách của bạn</h3><p>Chọn giọng, tốc độ, âm lượng và hẹn giờ; trình phát hỗ trợ màn hình tắt.</p></article>
+    </div></div></section>
+    <section id="giao-dien" class="gallery-section">
       <div class="wrap">
-        <div class="section-head"><div><p class="section-kicker">Công cụ vừa đủ</p><h2>Mọi thứ cần cho một buổi đọc liền mạch.</h2></div><p class="section-intro">Từ trình duyệt đến trình phát, mỗi phần đều giữ cho bạn quyền chọn nguồn, kiểm tra bản dịch và quyết định nội dung muốn lưu.</p></div>
-        <div class="feature-grid">
-          <article class="feature-card"><span class="feature-index">01</span><h3>Trình duyệt tích hợp</h3><p>Mở website, giữ tab, lịch sử, cookie và cache theo cách quen thuộc.</p></article>
-          <article class="feature-card"><span class="feature-index">02</span><h3>Dịch VietPhrase tại thiết bị</h3><p>Dịch phần chữ đang hiển thị, vẫn giữ nội dung gốc để đối chiếu.</p></article>
-          <article class="feature-card"><span class="feature-index">03</span><h3>Xem trước trước khi lưu</h3><p>Kiểm tra RAW, bản dịch và phần rác đã lọc trước khi đưa vào thư viện.</p></article>
-          <article class="feature-card"><span class="feature-index">04</span><h3>Tải chương theo khoảng</h3><p>Tải hàng loạt theo URL đầu/cuối, có checkpoint để tiếp tục khi gián đoạn.</p></article>
-          <article class="feature-card"><span class="feature-index">05</span><h3>Nhập ebook</h3><p>Đọc TXT, EPUB, MOBI, AZW3 không DRM và PDF có lớp chữ chọn được.</p></article>
-          <article class="feature-card"><span class="feature-index">06</span><h3>Nghe theo cách của bạn</h3><p>Chọn giọng, tốc độ, âm lượng và hẹn giờ; trình phát hỗ trợ màn hình tắt.</p></article>
+        <div class="section-head"><div><p class="section-kicker">Giao diện tham chiếu</p><h2>Nhìn rõ app trước khi bắt đầu.</h2></div><p class="section-intro">Ba màn hình đại diện cho luồng dùng chính: cài đặt, thư viện và nghe truyện.</p></div>
+        <p class="gallery-note"><span class="note-badge" aria-hidden="true">✓</span> Các khung dưới đây dùng dữ liệu mẫu trung tính do ứng dụng tạo; không hiển thị website, URL, tên tác phẩm, tác giả, logo hay quảng cáo của bên thứ ba.</p>
+        <div class="gallery-grid">
+          <figure class="ui-reference"><div class="ui-frame"><svg viewBox="0 0 560 820" role="img" aria-label="Màn hình cài đặt của ứng dụng">
+            <defs><linearGradient id="setBg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dff2ea"/><stop offset="1" stop-color="#f8e9d0"/></linearGradient><filter id="setShadow3" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b3838" flood-opacity=".16"/></filter></defs>
+            <rect width="560" height="820" fill="url(#setBg3)"/><rect width="560" height="58" fill="#082d30"/><text x="25" y="36" fill="#f2fff9" font-size="17" font-weight="700">09:41</text><text x="424" y="36" fill="#f2fff9" font-size="14" font-weight="700">Wi-Fi  96%</text>
+            <rect x="18" y="78" width="524" height="718" rx="32" fill="#fffdf8" fill-opacity=".95" filter="url(#setShadow3)"/><text x="43" y="128" fill="#102f32" font-size="30" font-weight="800">Cài đặt</text><text x="43" y="164" fill="#176f68" font-size="13" font-weight="800" letter-spacing="2">TRẢI NGHIỆM ĐỌC</text>
+            <rect x="38" y="184" width="484" height="184" rx="22" fill="#edf7f2"/><circle cx="70" cy="222" r="18" fill="#176f68"/><path d="M62 222h16M70 214v16" stroke="#fff" stroke-width="3" stroke-linecap="round"/><text x="103" y="220" fill="#102f32" font-size="19" font-weight="800">Dịch VietPhrase</text><text x="103" y="246" fill="#6a7c79" font-size="13">Xử lý ngay trên thiết bị</text><text x="58" y="284" fill="#176f68" font-size="13" font-weight="700">Thể loại từ điển</text><rect x="58" y="299" width="124" height="39" rx="19" fill="#176f68"/><text x="78" y="324" fill="#fff" font-size="13" font-weight="700">✓ Cổ trang</text><rect x="192" y="299" width="106" height="39" rx="19" fill="#fff" stroke="#9fcfc0"/><text x="212" y="324" fill="#395453" font-size="13">Đô thị</text><rect x="308" y="299" width="118" height="39" rx="19" fill="#fff" stroke="#9fcfc0"/><text x="327" y="324" fill="#395453" font-size="13">Tiên hiệp</text>
+            <rect x="38" y="387" width="484" height="153" rx="22" fill="#fff" stroke="#d9e7e1"/><text x="61" y="422" fill="#176f68" font-size="13" font-weight="700">TỪ ĐIỂN TÙY CHỈNH</text><rect x="61" y="440" width="438" height="49" rx="13" fill="#f5f1e8"/><text x="81" y="471" fill="#395453" font-size="16">ví dụ = bản dịch</text><rect x="363" y="500" width="136" height="29" rx="14" fill="#dff2ea"/><text x="387" y="520" fill="#0d514d" font-size="12" font-weight="700">Lưu từ điển</text>
+            <rect x="38" y="559" width="484" height="92" rx="22" fill="#edf7f2"/><circle cx="70" cy="605" r="18" fill="#c9924c"/><path d="M61 605h18M70 596v18" stroke="#fff" stroke-width="3" stroke-linecap="round"/><text x="103" y="603" fill="#102f32" font-size="18" font-weight="800">Tải khi tắt màn hình</text><text x="103" y="626" fill="#6a7c79" font-size="12">Tiếp tục tác vụ khi màn hình tắt</text><rect x="445" y="592" width="47" height="25" rx="13" fill="#176f68"/><circle cx="479" cy="604" r="9" fill="#fff"/>
+            <rect x="38" y="668" width="484" height="55" rx="18" fill="#fff" stroke="#d9e7e1"/><text x="61" y="702" fill="#102f32" font-size="15" font-weight="700">Quét nội dung chương</text><text x="385" y="702" fill="#6a7c79" font-size="12">Tùy chọn</text>
+            <rect x="38" y="742" width="484" height="38" rx="19" fill="#082d30"/><text x="66" y="766" fill="#bfe8da" font-size="12">Trình duyệt</text><text x="190" y="766" fill="#bfe8da" font-size="12">Thư viện</text><text x="314" y="766" fill="#bfe8da" font-size="12">Nghe truyện</text><text x="449" y="766" fill="#fff" font-size="12" font-weight="700">Cài đặt</text>
+          </svg></div><figcaption>Cài đặt <span>Tùy chỉnh dịch, từ điển và hoạt động nền</span></figcaption></figure>
+          <figure class="ui-reference"><div class="ui-frame"><svg viewBox="0 0 560 820" role="img" aria-label="Màn hình thư viện của ứng dụng">
+            <defs><linearGradient id="libBg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e5f4ee"/><stop offset="1" stop-color="#f7e8cd"/></linearGradient><filter id="libShadow3" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b3838" flood-opacity=".16"/></filter></defs>
+            <rect width="560" height="820" fill="url(#libBg3)"/><rect width="560" height="58" fill="#082d30"/><text x="25" y="36" fill="#f2fff9" font-size="17" font-weight="700">09:42</text><text x="421" y="36" fill="#f2fff9" font-size="14" font-weight="700">Wi-Fi  95%</text>
+            <rect x="18" y="78" width="524" height="718" rx="32" fill="#fffdf8" fill-opacity=".96" filter="url(#libShadow3)"/><text x="43" y="128" fill="#102f32" font-size="30" font-weight="800">Thư viện</text><text x="43" y="158" fill="#6a7c79" font-size="13">Nội dung đã lưu trong app</text>
+            <rect x="38" y="182" width="230" height="49" rx="24" fill="#176f68"/><text x="73" y="213" fill="#fff" font-size="15" font-weight="700">＋  Nhập tệp</text><rect x="292" y="182" width="230" height="49" rx="24" fill="#dff2ea"/><text x="334" y="213" fill="#0d514d" font-size="15" font-weight="700">⌄  Kho nội bộ</text>
+            <text x="43" y="276" fill="#176f68" font-size="13" font-weight="800" letter-spacing="2">ĐÃ LƯU GẦN ĐÂY</text>
+            <rect x="38" y="297" width="484" height="105" rx="22" fill="#edf7f2"/><rect x="57" y="316" width="66" height="66" rx="16" fill="#176f68"/><path d="M73 332h28v31H73zM78 328h18v6H78zM78 342h18M78 350h18" fill="none" stroke="#dff2ea" stroke-width="3" stroke-linecap="round"/><text x="143" y="334" fill="#102f32" font-size="19" font-weight="800">Sách mẫu 01</text><text x="143" y="361" fill="#6a7c79" font-size="13">8 chương  ·  đã lưu</text><text x="464" y="353" fill="#176f68" font-size="22">⋮</text>
+            <rect x="38" y="417" width="484" height="105" rx="22" fill="#fff" stroke="#d9e7e1"/><rect x="57" y="436" width="66" height="66" rx="16" fill="#c9924c"/><path d="M73 452h28v31H73zM78 448h18v6H78zM78 462h18M78 470h18" fill="none" stroke="#fff8e9" stroke-width="3" stroke-linecap="round"/><text x="143" y="454" fill="#102f32" font-size="19" font-weight="800">Sách mẫu 02</text><text x="143" y="481" fill="#6a7c79" font-size="13">12 chương  ·  đang đọc</text><text x="464" y="473" fill="#176f68" font-size="22">⋮</text>
+            <rect x="38" y="537" width="484" height="105" rx="22" fill="#edf7f2"/><rect x="57" y="556" width="66" height="66" rx="16" fill="#0d514d"/><path d="M73 572h28v31H73zM78 568h18v6H78zM78 582h18M78 590h18" fill="none" stroke="#dff2ea" stroke-width="3" stroke-linecap="round"/><text x="143" y="574" fill="#102f32" font-size="19" font-weight="800">Bản đọc thử</text><text x="143" y="601" fill="#6a7c79" font-size="13">3 chương  ·  sẵn sàng nghe</text><text x="464" y="593" fill="#176f68" font-size="22">⋮</text>
+            <rect x="38" y="676" width="484" height="50" rx="18" fill="#f5f1e8"/><text x="60" y="707" fill="#395453" font-size="13">Tệp và chương được lưu trong bộ nhớ riêng</text>
+            <rect x="38" y="742" width="484" height="38" rx="19" fill="#082d30"/><text x="66" y="766" fill="#bfe8da" font-size="12">Trình duyệt</text><text x="190" y="766" fill="#fff" font-size="12" font-weight="700">Thư viện</text><text x="314" y="766" fill="#bfe8da" font-size="12">Nghe truyện</text><text x="449" y="766" fill="#bfe8da" font-size="12">Cài đặt</text>
+          </svg></div><figcaption>Thư viện <span>Giữ chương đã lưu và tệp nhập ở một nơi</span></figcaption></figure>
+          <figure class="ui-reference"><div class="ui-frame"><svg viewBox="0 0 560 820" role="img" aria-label="Màn hình nghe truyện của ứng dụng">
+            <defs><linearGradient id="playBg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#082d30"/><stop offset="1" stop-color="#176f68"/></linearGradient><filter id="playShadow3" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#0b3838" flood-opacity=".2"/></filter></defs>
+            <rect width="560" height="820" fill="url(#playBg3)"/><text x="25" y="36" fill="#e5fff5" font-size="17" font-weight="700">09:43</text><text x="421" y="36" fill="#e5fff5" font-size="14" font-weight="700">Wi-Fi  94%</text><text x="43" y="112" fill="#9ed8c9" font-size="13" font-weight="800" letter-spacing="2">ĐANG PHÁT</text><text x="43" y="158" fill="#f4fffa" font-size="31" font-weight="800">Nghe truyện</text><text x="43" y="188" fill="#b8d5cc" font-size="14">Sách mẫu 01  ·  Chương 03</text>
+            <rect x="38" y="226" width="484" height="310" rx="28" fill="#fffdf8" filter="url(#playShadow3)"/><text x="66" y="272" fill="#c9924c" font-size="12" font-weight="800" letter-spacing="2">BẢN ĐỌC ĐÃ CHỌN</text><text x="66" y="316" fill="#102f32" font-size="23" font-weight="800">Chương mẫu 03</text><line x1="66" y1="343" x2="494" y2="343" stroke="#d9e7e1"/><text x="66" y="382" fill="#395453" font-size="17">Bình minh chạm nhẹ lên ô cửa.</text><text x="66" y="413" fill="#395453" font-size="17">Từng câu chữ được đọc với nhịp</text><text x="66" y="444" fill="#395453" font-size="17">êm, rõ và vừa với người nghe.</text><text x="66" y="486" fill="#6a7c79" font-size="13">Đoạn 03 / 12</text>
+            <rect x="66" y="506" width="428" height="6" rx="3" fill="#d9e7e1"/><rect x="66" y="506" width="204" height="6" rx="3" fill="#c9924c"/><circle cx="270" cy="509" r="9" fill="#c9924c" stroke="#fff" stroke-width="3"/>
+            <circle cx="174" cy="610" r="31" fill="#dff2ea"/><text x="162" y="619" fill="#0d514d" font-size="18">↶</text><circle cx="280" cy="610" r="47" fill="#f8e9d0"/><text x="266" y="622" fill="#0d514d" font-size="25">Ⅱ</text><circle cx="386" cy="610" r="31" fill="#dff2ea"/><text x="376" y="619" fill="#0d514d" font-size="18">↷</text>
+            <rect x="38" y="676" width="230" height="50" rx="18" fill="#145b56"/><text x="61" y="707" fill="#e8fff7" font-size="13" font-weight="700">Giọng Việt</text><text x="183" y="707" fill="#b8d5cc" font-size="13">1.0×</text><rect x="292" y="676" width="230" height="50" rx="18" fill="#145b56"/><text x="326" y="707" fill="#e8fff7" font-size="13" font-weight="700">Hẹn giờ</text><text x="439" y="707" fill="#b8d5cc" font-size="13">Tắt</text>
+            <rect x="38" y="742" width="484" height="38" rx="19" fill="#f1fbf6"/><text x="66" y="766" fill="#0d514d" font-size="12">Trình duyệt</text><text x="190" y="766" fill="#0d514d" font-size="12">Thư viện</text><text x="314" y="766" fill="#0d514d" font-size="12" font-weight="700">Nghe truyện</text><text x="449" y="766" fill="#0d514d" font-size="12">Cài đặt</text>
+          </svg></div><figcaption>Trình phát <span>Chọn giọng, tốc độ và hẹn giờ nghe</span></figcaption></figure>
         </div>
       </div>
     </section>
-
-    <section id="quy-trinh" class="dark-section">
-      <div class="wrap">
-        <div class="section-head"><div><p class="section-kicker">Một quy trình rõ ràng</p><h2>Từ trang web đến giọng đọc, không bước nào bị giấu.</h2></div><p class="section-intro">Bạn luôn thấy nội dung gốc, biết điều gì đang được lưu và có thể chỉnh sửa trước khi nghe.</p></div>
-        <div class="workflow">
-          <div class="workflow-step"><div class="workflow-number">01</div><h3>Chọn nguồn</h3><p>Mở website hoặc chọn tệp ebook từ thiết bị.</p></div>
-          <div class="workflow-step"><div class="workflow-number">02</div><h3>Kiểm tra</h3><p>Xem bản gốc và bản VietPhrase trước khi lưu.</p></div>
-          <div class="workflow-step"><div class="workflow-number">03</div><h3>Lưu thư viện</h3><p>Chỉnh TXT, rà lỗi và giữ chương bạn muốn.</p></div>
-          <div class="workflow-step"><div class="workflow-number">04</div><h3>Bấm nghe</h3><p>Chọn giọng Việt, tốc độ và hẹn giờ ngủ.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trust">
-      <div class="wrap">
-        <div class="section-head"><div><p class="section-kicker">Minh bạch từ đầu</p><h2>Công cụ đọc tốt cũng cần nói rõ giới hạn.</h2></div><p class="section-intro">Thiết kế sản phẩm và nội dung giới thiệu đều ưu tiên sự rõ ràng, quyền riêng tư và quyền tác giả.</p></div>
-        <div class="trust-grid">
-          <article class="trust-card"><h3>Dữ liệu của bạn, trong tầm kiểm soát</h3><p>Thư viện, bản dịch, tiến độ nghe và cài đặt được lưu trong vùng dữ liệu riêng của Android để phục vụ trực tiếp cho app.</p><ul><li>Không có hệ thống tài khoản riêng.</li><li>Không có máy chủ riêng để lưu thư viện.</li><li>Một số bản phát hành có Google Mobile Ads; xem chính sách để biết rõ hơn.</li></ul></article>
-          <article class="trust-card accent"><h3>Nội dung hợp pháp, trải nghiệm bền vững</h3><p>Ứng dụng không phải kho truyện và không đại diện cho website bên ngoài. Chỉ xử lý nội dung bạn sở hữu, được cho phép hoặc được pháp luật cho phép.</p><ul><li>Không vượt tường phí, DRM hoặc CAPTCHA.</li><li>Không tải/chia sẻ nội dung trái phép.</li><li>Bản dịch tự động có thể sai và cần được kiểm tra.</li></ul></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact">
-      <div class="wrap contact-card">
-        <div><p class="section-kicker">Cần hỗ trợ?</p><h2>Đọc kỹ chính sách. Gửi câu hỏi. Giữ quyền chủ động.</h2><p>Trang quyền riêng tư và điều khoản được viết bằng HTML tĩnh để mở trực tiếp trong trình duyệt. Phản ánh hỗ trợ hoặc bản quyền: <a href="mailto:manhviennguyen@gmail.com">manhviennguyen@gmail.com</a>.</p><div class="contact-links"><a href="privacy.html">Chính sách quyền riêng tư →</a><a href="terms.html">Điều khoản sử dụng →</a></div></div>
-        <a class="button" href="mailto:manhviennguyen@gmail.com">Liên hệ</a>
-      </div>
-    </section>
+    <section id="quy-trinh" class="dark-section"><div class="wrap"><div class="section-head"><div><p class="section-kicker">Một quy trình rõ ràng</p><h2>Từ trang web đến giọng đọc, không bước nào bị giấu.</h2></div><p class="section-intro">Bạn luôn thấy nội dung gốc, biết điều gì đang được lưu và có thể chỉnh sửa trước khi nghe.</p></div><div class="workflow"><div class="workflow-step"><div class="workflow-number">01</div><h3>Chọn nguồn</h3><p>Mở website hoặc chọn tệp ebook từ thiết bị.</p></div><div class="workflow-step"><div class="workflow-number">02</div><h3>Kiểm tra</h3><p>Xem bản gốc và bản VietPhrase trước khi lưu.</p></div><div class="workflow-step"><div class="workflow-number">03</div><h3>Lưu thư viện</h3><p>Chỉnh TXT, rà lỗi và giữ chương bạn muốn.</p></div><div class="workflow-step"><div class="workflow-number">04</div><h3>Bấm nghe</h3><p>Chọn giọng Việt, tốc độ và hẹn giờ ngủ.</p></div></div></div></section>
+    <section class="trust"><div class="wrap"><div class="section-head"><div><p class="section-kicker">Minh bạch từ đầu</p><h2>Công cụ đọc tốt cũng cần nói rõ giới hạn.</h2></div><p class="section-intro">Thiết kế sản phẩm và nội dung giới thiệu đều ưu tiên sự rõ ràng, quyền riêng tư và quyền tác giả.</p></div><div class="trust-grid"><article class="trust-card"><h3>Dữ liệu của bạn, trong tầm kiểm soát</h3><p>Thư viện, bản dịch, tiến độ nghe và cài đặt được lưu trong vùng dữ liệu riêng của Android để phục vụ trực tiếp cho app.</p><ul><li>Không có hệ thống tài khoản riêng.</li><li>Không có máy chủ riêng để lưu thư viện.</li><li>Một số bản phát hành có Google Mobile Ads; xem chính sách để biết rõ hơn.</li></ul></article><article class="trust-card accent"><h3>Nội dung hợp pháp, trải nghiệm bền vững</h3><p>Ứng dụng không phải kho truyện và không đại diện cho website bên ngoài. Chỉ xử lý nội dung bạn sở hữu, được cho phép hoặc được pháp luật cho phép.</p><ul><li>Không vượt tường phí, DRM hoặc CAPTCHA.</li><li>Không tải/chia sẻ nội dung trái phép.</li><li>Bản dịch tự động có thể sai và cần được kiểm tra.</li></ul></article></div></div></section>
+    <section class="contact"><div class="wrap contact-card"><div><p class="section-kicker">Cần hỗ trợ?</p><h2>Đọc kỹ chính sách. Gửi câu hỏi. Giữ quyền chủ động.</h2><p>Trang quyền riêng tư và điều khoản được viết bằng HTML tĩnh để mở trực tiếp trong trình duyệt. Phản ánh hỗ trợ hoặc quyền tác giả: <a href="mailto:manhviennguyen@gmail.com">manhviennguyen@gmail.com</a>.</p><div class="contact-links"><a href="privacy.html">Chính sách quyền riêng tư →</a><a href="terms.html">Điều khoản sử dụng →</a></div></div><a class="button" href="mailto:manhviennguyen@gmail.com">Liên hệ</a></div></section>
   </main>
-
-  <footer>
-    <div class="wrap footer-row"><div><p><strong>Truyện Tự Dịch Tự Nghe</strong></p><p>Trang giới thiệu ứng dụng Android · cập nhật khi tính năng hoặc cách xử lý dữ liệu thay đổi.</p></div><p><a href="privacy.html">Quyền riêng tư</a> · <a href="terms.html">Điều khoản</a> · <a href="mailto:manhviennguyen@gmail.com">Liên hệ</a></p></div>
-  </footer>
+  <footer><div class="wrap footer-row"><div><p><strong>Truyện Tự Dịch Tự Nghe</strong></p><p>Trang giới thiệu ứng dụng Android · cập nhật khi tính năng hoặc cách xử lý dữ liệu thay đổi.</p></div><p><a href="privacy.html">Quyền riêng tư</a> · <a href="terms.html">Điều khoản</a> · <a href="mailto:manhviennguyen@gmail.com">Liên hệ</a></p></div></footer>
 </body>
 </html>
