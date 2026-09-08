@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Truyện Tự Dịch Tự Nghe - ứng dụng Android hỗ trợ dịch, lưu, đọc và nghe truyện bằng giọng Việt.">
+  <title>Truyện Tự Dịch Tự Nghe</title>
+  <style>
+    :root { color-scheme: light; --ink:#193b3a; --muted:#5a6d6a; --teal:#176c63; --teal-dark:#0d4f49; --cream:#f7f3ea; --paper:#fffdf8; --line:#dce7e1; --gold:#c98d3a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--cream); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height:1.65; }
+    a { color:var(--teal-dark); }
+    .wrap { width:min(1120px, calc(100% - 36px)); margin:auto; }
+    header { padding:22px 0; background:rgba(247,243,234,.94); border-bottom:1px solid var(--line); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { color:var(--ink); text-decoration:none; font-weight:800; letter-spacing:.01em; }
+    nav { display:flex; flex-wrap:wrap; gap:18px; font-size:.94rem; }
+    nav a { text-decoration:none; font-weight:650; }
+    nav a:hover { text-decoration:underline; }
+    .hero { padding:92px 0 78px; background:linear-gradient(135deg, #e6f0e9 0%, #f7f3ea 62%, #f2e4cb 100%); }
+    .eyebrow { margin:0 0 14px; color:var(--teal); font-size:.84rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { max-width:780px; margin:0; font-family: Georgia, "Times New Roman", serif; font-size:clamp(2.5rem, 7vw, 5.2rem); line-height:1.03; letter-spacing:-.035em; }
+    .lead { max-width:690px; margin:24px 0 30px; color:#3e5854; font-size:clamp(1.12rem, 2vw, 1.35rem); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .button { display:inline-block; padding:12px 18px; border-radius:999px; border:1px solid var(--teal); background:var(--teal); color:white; text-decoration:none; font-weight:750; }
+    .button.secondary { background:transparent; color:var(--teal-dark); }
+    .button:hover { background:var(--teal-dark); }
+    .button.secondary:hover { background:#e1eee8; }
+    section { padding:76px 0; }
+    .section-head { max-width:700px; margin-bottom:30px; }
+    h2 { margin:0 0 12px; font-family:Georgia, "Times New Roman", serif; font-size:clamp(1.9rem, 4vw, 3rem); line-height:1.1; }
+    h3 { margin:0 0 8px; font-size:1.12rem; }
+    .section-head p, .card p, .note p { margin:0; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+    .card, .note { padding:24px; border:1px solid var(--line); border-radius:20px; background:var(--paper); box-shadow:0 10px 28px rgba(25,59,58,.05); }
+    .number { display:grid; place-items:center; width:34px; height:34px; margin-bottom:18px; border-radius:50%; background:#e4f0e9; color:var(--teal-dark); font-weight:850; }
+    .steps { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+    .step { padding:22px; border-top:3px solid var(--gold); background:rgba(255,253,248,.72); }
+    .step p { margin:0; color:var(--muted); }
+    .band { background:var(--teal-dark); color:#f4fbf7; }
+    .band .section-head p, .band .card p { color:#c9ddd5; }
+    .band .card { background:#145a54; border-color:#2c746b; box-shadow:none; }
+    .band a { color:#fff0c9; }
+    .two-col { display:grid; grid-template-columns:1.05fr .95fr; gap:22px; align-items:start; }
+    .notice { border-left:4px solid var(--gold); padding:18px 20px; background:#fff8e9; color:#604a2d; }
+    footer { padding:32px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.92rem; }
+    footer p { margin:6px 0; }
+    @media (max-width: 780px) { .nav { align-items:flex-start; flex-direction:column; } .hero { padding:64px 0 58px; } .grid, .steps, .two-col { grid-template-columns:1fr; } section { padding:56px 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="index.html">Truyện Tự Dịch Tự Nghe</a>
+      <nav aria-label="Điều hướng chính">
+        <a href="#tinh-nang">Tính năng</a>
+        <a href="#cach-dung">Cách dùng</a>
+        <a href="privacy.html">Quyền riêng tư</a>
+        <a href="terms.html">Điều khoản</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Ứng dụng Android</p>
+        <h1>Đọc truyện thuận tiện hơn. Nghe truyện tự nhiên hơn.</h1>
+        <p class="lead">Truyện Tự Dịch Tự Nghe hỗ trợ dịch VietPhrase tại thiết bị, lưu chương vào thư viện và đọc bằng giọng Việt. Bạn chủ động chọn nguồn, kiểm tra bản dịch và quyết định nội dung muốn lưu.</p>
+        <div class="actions">
+          <a class="button" href="#tinh-nang">Xem tính năng</a>
+          <a class="button secondary" href="privacy.html">Đọc chính sách quyền riêng tư</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="tinh-nang">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Một luồng đọc và nghe liền mạch</h2>
+          <p>Các công cụ tập trung trong một ứng dụng, từ lúc mở nguồn truyện đến lúc nghe chương đã lưu.</p>
+        </div>
+        <div class="grid">
+          <article class="card"><div class="number">01</div><h3>Trình duyệt tích hợp</h3><p>Duyệt trang web, giữ tab, lịch sử, cookie và cache theo cách quen thuộc của trình duyệt.</p></article>
+          <article class="card"><div class="number">02</div><h3>Dịch VietPhrase tại thiết bị</h3><p>Dịch phần chữ đang hiển thị bằng bộ từ điển cục bộ; nội dung gốc được giữ riêng để đối chiếu khi quét chương.</p></article>
+          <article class="card"><div class="number">03</div><h3>Xem trước và tải hàng loạt</h3><p>Kiểm tra RAW và bản dịch trước khi lưu, tải theo khoảng chương và tiếp tục từ checkpoint khi cần.</p></article>
+          <article class="card"><div class="number">04</div><h3>Thư viện offline</h3><p>Lưu chương đã chọn, chỉnh sửa TXT, rà lỗi định dạng và xuất nội dung theo thư mục bạn chọn.</p></article>
+          <article class="card"><div class="number">05</div><h3>Nhập ebook</h3><p>Hỗ trợ TXT, EPUB, MOBI, AZW3 không DRM và PDF có lớp chữ chọn được.</p></article>
+          <article class="card"><div class="number">06</div><h3>Nghe bằng giọng Việt</h3><p>Dùng Android TTS hoặc Piper tiếng Việt; điều chỉnh giọng, tốc độ, âm lượng và hẹn giờ ngủ.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cach-dung" class="band">
+      <div class="wrap">
+        <div class="section-head"><h2>Bắt đầu trong bốn bước</h2><p>Ứng dụng để người đọc tự kiểm soát nguồn và bản lưu của mình.</p></div>
+        <div class="steps">
+          <div class="step"><h3>1. Chọn nguồn</h3><p>Mở trang truyện trong trình duyệt hoặc chọn tệp ebook từ thiết bị.</p></div>
+          <div class="step"><h3>2. Kiểm tra</h3><p>Xem nội dung gốc và bản VietPhrase, chỉnh bộ lọc nếu cần.</p></div>
+          <div class="step"><h3>3. Lưu thư viện</h3><p>Lưu chương đã chọn để đọc, sửa TXT hoặc sử dụng khi offline.</p></div>
+          <div class="step"><h3>4. Bấm nghe</h3><p>Chọn giọng Việt, tốc độ và hẹn giờ; trình phát hỗ trợ khi tắt màn hình.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div class="section-head">
+          <h2>Minh bạch về nội dung và quyền sử dụng</h2>
+          <p>Ứng dụng là công cụ hỗ trợ đọc, dịch và nghe. Ứng dụng không phải kho truyện, không đại diện cho các website bên ngoài và không cấp quyền đối với tác phẩm của bên thứ ba.</p>
+        </div>
+        <div class="notice">
+          <p>Chỉ xử lý nội dung bạn sở hữu, được cho phép hoặc được pháp luật cho phép. Không dùng ứng dụng để vượt tường phí, DRM, CAPTCHA hay biện pháp kiểm soát truy cập; không tải hoặc chia sẻ nội dung trái phép. Bản dịch tự động có thể sai và cần được người dùng kiểm tra.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ho-tro">
+      <div class="wrap">
+        <div class="section-head"><h2>Quyền riêng tư và hỗ trợ</h2><p>Trang chính sách mô tả dữ liệu lưu trong thiết bị, dữ liệu trao đổi với website do người dùng chọn, Google Mobile Ads và các dịch vụ tùy chọn.</p></div>
+        <div class="grid">
+          <article class="card"><h3>Chính sách quyền riêng tư</h3><p>Đọc chính sách HTML công khai, không yêu cầu đăng nhập và có thông tin lưu trữ, xóa dữ liệu.</p><p style="margin-top:14px"><a href="privacy.html">Mở chính sách quyền riêng tư →</a></p></article>
+          <article class="card"><h3>Điều khoản sử dụng</h3><p>Quy định phạm vi sử dụng, trách nhiệm về nguồn nội dung và quy trình phản ánh bản quyền.</p><p style="margin-top:14px"><a href="terms.html">Mở điều khoản sử dụng →</a></p></article>
+          <article class="card"><h3>Liên hệ</h3><p>Gửi câu hỏi hỗ trợ hoặc thông báo bản quyền đến <a href="mailto:manhviennguyen@gmail.com">manhviennguyen@gmail.com</a>.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>Truyện Tự Dịch Tự Nghe</strong></p>
+      <p>Trang giới thiệu ứng dụng Android. Cập nhật nội dung khi cách xử lý dữ liệu hoặc tính năng thay đổi.</p>
+      <p><a href="privacy.html">Quyền riêng tư</a> · <a href="terms.html">Điều khoản sử dụng</a> · <a href="mailto:manhviennguyen@gmail.com">Liên hệ</a></p>
+    </div>
+  </footer>
+</body>
+</html>
