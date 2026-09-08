@@ -6,29 +6,32 @@
   <meta name="description" content="Điều khoản sử dụng của ứng dụng Truyện Tự Dịch Tự Nghe.">
   <title>Điều khoản sử dụng - Truyện Tự Dịch Tự Nghe</title>
   <style>
-    :root { color-scheme:light; --ink:#193b3a; --muted:#5a6d6a; --teal:#176c63; --cream:#f7f3ea; --paper:#fffdf8; --line:#dce7e1; --gold:#c98d3a; }
+    :root { color-scheme:light; --ink:#102f32; --ink-soft:#395453; --muted:#6a7c79; --deep:#082d30; --teal:#176f68; --teal-dark:#0d514d; --sand:#f5f1e8; --paper:#fffdf8; --line:#d9e7e1; --gold:#c9924c; --gold-soft:#f8e9d0; }
     * { box-sizing:border-box; }
-    body { margin:0; color:var(--ink); background:var(--cream); font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.72; }
-    a { color:#0d4f49; }
-    .wrap { width:min(900px,calc(100% - 36px)); margin:auto; }
-    header { padding:22px 0; border-bottom:1px solid var(--line); }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--sand); background-image:radial-gradient(circle at 8% 8%, rgba(205,240,228,.6), transparent 28rem), radial-gradient(circle at 94% 34%, rgba(247,225,187,.32), transparent 25rem); font-family:"Roboto","Segoe UI",Arial,sans-serif; font-feature-settings:"kern" 1; font-kerning:normal; text-rendering:optimizeLegibility; line-height:1.72; }
+    a { color:var(--teal-dark); }
+    .wrap { width:min(940px,calc(100% - 36px)); margin:auto; }
+    header { position:sticky; top:0; z-index:5; padding:18px 0; border-bottom:1px solid rgba(217,231,225,.86); background:rgba(245,241,232,.84); backdrop-filter:blur(18px); }
     .top { display:flex; align-items:center; justify-content:space-between; gap:18px; }
-    .brand { color:var(--ink); text-decoration:none; font-weight:800; }
-    nav { display:flex; flex-wrap:wrap; gap:16px; font-size:.94rem; }
-    nav a { text-decoration:none; font-weight:650; }
-    main { padding:62px 0 78px; }
-    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.15; }
-    h1 { margin:0 0 12px; font-size:clamp(2.1rem,5vw,3.7rem); letter-spacing:-.025em; }
-    h2 { margin:42px 0 12px; color:#145a54; font-size:1.65rem; }
-    .meta { margin:0 0 34px; color:var(--muted); }
-    .paper { padding:clamp(24px,5vw,48px); border:1px solid var(--line); border-radius:22px; background:var(--paper); box-shadow:0 12px 34px rgba(25,59,58,.06); }
-    .notice { margin:0 0 28px; padding:18px 20px; border-left:4px solid var(--gold); background:#fff8e9; color:#604a2d; }
+    .brand { color:var(--ink); text-decoration:none; font-weight:850; letter-spacing:.01em; }
+    nav { display:flex; flex-wrap:wrap; gap:16px; font-size:.9rem; }
+    nav a { color:var(--ink-soft); text-decoration:none; font-weight:750; }
+    nav a:hover { color:var(--teal-dark); }
+    main { padding:72px 0 86px; }
+    h1,h2 { font-family:"Roboto","Segoe UI",Arial,sans-serif; font-weight:850; letter-spacing:-.02em; line-height:1.18; }
+    h1 { margin:0 0 12px; font-size:clamp(2.35rem,5vw,4rem); }
+    h2 { margin:45px 0 12px; padding-top:19px; border-top:1px solid var(--line); color:var(--teal-dark); font-size:1.58rem; }
+    .meta { margin:0 0 30px; color:var(--muted); }
+    .paper { padding:clamp(25px,5vw,52px); border:1px solid rgba(217,231,225,.95); border-radius:30px; background:rgba(255,253,248,.9); box-shadow:0 24px 65px rgba(9,50,49,.09); }
+    .notice { margin:0 0 30px; padding:20px 22px; border:1px solid #edd4aa; border-left:5px solid var(--gold); border-radius:18px; background:linear-gradient(135deg,#fff8e9,#fffdf8); color:#604a2d; }
     ul { padding-left:1.25rem; }
-    li+li { margin-top:7px; }
+    li+li { margin-top:8px; }
     .small { color:var(--muted); font-size:.94rem; }
-    footer { padding:30px 0 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.92rem; }
+    footer { padding:32px 0 52px; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; }
     footer p { margin:6px 0; }
-    @media (max-width:680px) { .top { align-items:flex-start; flex-direction:column; } main { padding:42px 0 58px; } }
+    footer a { text-decoration:none; font-weight:750; }
+    @media (max-width:680px) { .top { align-items:flex-start; flex-direction:column; } header { padding:15px 0; } main { padding:48px 0 60px; } }
   </style>
 </head>
 <body>
