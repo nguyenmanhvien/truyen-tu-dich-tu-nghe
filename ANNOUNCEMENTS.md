@@ -20,7 +20,7 @@ Bạn có thể giữ nguyên tiêu đề và chỉ sửa nội dung. Không c�
 
 ## Khi nào điện thoại nhận được?
 
-APK từ bản NoAds v16 tự đọc trực tiếp tệp đã lưu trên GitHub khi mở app, mở lại sau khi ra ngoài, bấm chuông và quét nền khoảng 5 giờ/lần khi có mạng. Android có thể trì hoãn quét nền khi tiết kiệm pin hoặc mất mạng. Sau khi bấm Buộc dừng, cần mở app lại.
+APK từ bản NoAds v17 tự đọc trực tiếp tệp đã lưu trên GitHub khi mở app, mở lại sau khi ra ngoài, bấm chuông và quét nền khoảng 5 giờ/lần khi có mạng. Android có thể trì hoãn quét nền khi tiết kiệm pin hoặc mất mạng. Sau khi bấm Buộc dừng, cần mở app lại.
 
 Quét nền cập nhật danh sách và số ở chuông; không tự bật popup giữa lúc dùng app. Popup chỉ được xét khi mở app ở màn hình Trình duyệt, và không hiện khi đang nghe truyện hoặc đã chuyển sang Thư viện/Nghe truyện. Bấm chuông để đọc lại bất cứ lúc nào.
 
